@@ -55,8 +55,14 @@ func main() {
 				value, _ := redis.String(r.Do("GET", key))
 				fmt.Printf("  %v\n", value)
 
+			case "hash":
+				values, _ := redis.Strings(r.Do("HGETALL", key))
+				for i := 0; i < len(values)/2; i++ {
+					fmt.Printf("  %v | %v\n", values[i*2+1], values[i*2])
+				}
+
 			default:
-				fmt.Printf("  (%v not supported)", valueType)
+				fmt.Printf("  (%v not supported)\n", valueType)
 			}
 
 			fmt.Println()
