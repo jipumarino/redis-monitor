@@ -19,7 +19,11 @@ func main() {
 		address = os.Args[1]
 	}
 
-	r, _ := redis.Dial("tcp", address)
+	r, err := redis.Dial("tcp", address)
+	if err != nil {
+		fmt.Printf("Couldn't connect to Redis service at %s\n", address)
+		os.Exit(1)
+	}
 
 	for ; ; time.Sleep(1 * time.Second) {
 		clearScreen()
