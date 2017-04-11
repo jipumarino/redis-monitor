@@ -62,7 +62,7 @@ func main() {
 			case "hash":
 				values, _ := redis.Strings(r.Do("HGETALL", key))
 				for i := 0; i < len(values)/2; i++ {
-					fmt.Printf("  %v | %v\n", values[i*2+1], values[i*2])
+					fmt.Printf("  %v | %v\n", values[i*2], values[i*2+1])
 				}
 
 			default:
